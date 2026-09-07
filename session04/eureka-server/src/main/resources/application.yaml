@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: eureka-server
+
+server:
+  port: 8761 # port mặc định của eureka server
+
+eureka:
+  client:
+    register-with-eureka: false # không cần đăng ký nó lên eureka server làm gì cả
+    fetch-registry: false # không lấy tất cả service trên eureka server làm gì cả
