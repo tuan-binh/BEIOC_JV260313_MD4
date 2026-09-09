@@ -1,0 +1,42 @@
+spring:
+  application:
+    name: api-gateway
+  # lưu ý: khi sử dụng webflux thì bắt buộc phải cấu hình
+  main:
+    web-application-type: reactive
+  cloud:
+    gateway:
+      server:
+        webflux:
+          discovery:
+            locator:
+              enabled: true # bật dynamic route
+              lower-case-service-id: true # biến đổi service id trên eureka từ in hoa về thành in thường
+
+# sử dụng gọi lên eureka-server là lấy tất cả các instance đang có và tự động setup hết các route thông qua service id
+
+# khi sử dynamic route thì sẽ phải thêm tiền tố service id vào
+# http://localhost:8080/product-service/api/v1/products
+
+#          routes:
+#            - id: product-service
+##              uri: http://localhost:8081/api/v1/products
+#              uri: lb://product-service
+#              predicates:
+#                - Path=/api/v1/products/**
+#              filters:
+#                # (filter built in)
+#                - AddRequestHeader=X-Gateway, api-gateway
+#                - AddResponseHeader=X-Pass-Gateway, api-gateway
+##            Nếu như có nhiều service khác thì đi liệt kê ở dưới
+#            - id:
+
+# mặc định spring boot port là 8080
+
+# cấu hình về eureka
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
