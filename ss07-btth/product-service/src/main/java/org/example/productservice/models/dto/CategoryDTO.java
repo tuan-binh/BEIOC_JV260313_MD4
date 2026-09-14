@@ -1,0 +1,15 @@
+package org.example.productservice.models.dto;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@Builder
+public class CategoryDTO {
+    private Long id;
+    private String name;
+}

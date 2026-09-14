@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: config-server
+  profiles:
+    active: native
+  cloud:
+    config:
+      server:
+        native:
+          # Nhớ thay đổi đường dẫn local
+          search-locations: file:D:\BE_IOC\JB_IOC_PTHB260316\module04\ss07-btth\config-server\src\main\resources\config-repo
+
+server:
+  port: 8888
+

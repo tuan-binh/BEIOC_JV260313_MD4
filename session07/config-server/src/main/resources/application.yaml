@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: config-server
+#  profiles:
+#    active: native
+  cloud:
+    config:
+      server:
+#        native:
+#          search-locations: file:D:\BE_IOC\JB_IOC_PTHB260316\module04\session07\config-server\src\main\resources\config-repo
+      # Cấu hình đọc từ local (native)
+
+# Cấu hình đọc từ git:
+        git:
+          uri: https://github.com/tuan-binh/config-server.git
+          default-label: main
+          clone-on-start: true
+# nếu để git repo là private thì phải có username và password
+
+server:
+  port: 8888

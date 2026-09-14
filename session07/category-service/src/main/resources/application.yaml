@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: category-service
+  # Phụ thuộc vào bên git repository đang để là môi trường gì
+  profiles:
+    active: dev
+  config:
+    import: optional:configserver:http://localhost:8888/
+# configserver: mặc định sẽ phải lấy ở trên config server và nạp để chạy (trường hợp ko có thì chắc chắn không thể chạy được)
+# optional: nếu như config server bị sập thì sẽ lấy những cái mặc định và ko bị lỗi
+
+# Cấu hình để refresh thông tin cấu hình mà không cần phải chạy lại dịch vụ
+
+#  datasource:
+#    url: jdbc:postgresql://localhost:5432/category_db_test
+#    username: postgres
+#    password: 123456
+#    driver-class-name: org.postgresql.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      naming:
+#        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+#        implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.PostgreSQLDialect
+#        show_sql: true
+#        format_sql: true
+#
+#eureka:
+#  client:
+#    register-with-eureka: true
+#    fetch-registry: true
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka/
