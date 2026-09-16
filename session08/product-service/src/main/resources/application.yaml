@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: product-service
+server:
+  port: 8081
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      findByIdCircuitBreaker:
+        - register-health-indicator: true
+        - sliding-window-type: count_based
+        - minimum-number-of-calls: 10
+        - failure-rate-threshold: 50
+        - wait-duration-in-open-state: 10
+        - permitted-number-of-calls-in-half-open-state: 5
+  retry:
+    instances:
+      findByIdRetry:
+        - max-attempts: 3
+        - wait-duration: 1s
+        - ignore-exceptions:
+            - org.springframework.web.client.HttpClientErrorException.BadRequest
+            - org.springframework.web.client.HttpClientErrorException.Unauthorized
+            - org.springframework.web.client.HttpClientErrorException.Forbidden
+        - fail-after-max-attempts: true # sẽ ném ngoại khi vượt quá số lần thử nếu như không có fallback
+  ratelimiter:
+    instances:
+      findByIdRateLimter:
+        - register-health-indicator: true
+        - limit-for-period: 1
+        - limit-refresh-period: 1s
+        - timeout-duration: 200ms
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, circuitbreakers, circuitbreakerevents
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    ratelimiters:
+      enabled: true
